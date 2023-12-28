@@ -7,7 +7,6 @@ import {
 } from "../utils/utils.js";
 
 // Get Logged User Info
-getLoggedUser();
 
 // Get Admin Pages
 showNavAdminPages();
