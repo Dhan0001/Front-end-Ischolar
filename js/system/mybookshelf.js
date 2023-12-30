@@ -17,35 +17,7 @@ async function getBooks() {
 
   if (response.ok) {
     const json = await response.json();
-
-    let container = "";
-    json.forEach((element) => {
-      const date = new Date(element.created_at).toLocaleString();
-
-      container += `<div class="table-responsive-lg"">
-                      <table class="table table-hover border text-center">
-                          <thead>
-                              <tr class="bg-dark">
-                              <th scope="col" class="text-dark">${element.title}</th>
-                              <th scope="col" class="text-dark">${element.author}</th>
-                              <th scope="col" class="text-dark">${element.ISBN}</th>
-                              <th scope="col" class="text-dark">${element.description}</th>
-                              <th scope="col" class="text-dark">${element.publication_year}</th>
-                            <img src="${backendURL}/storage/${element.image}" alt="Image" height = "250px" width = "250px">
-                            <th scope="col" class="text-dark">${element.condition}</th>
-                            <th scope="col" class="text-dark">${element.owner_facebook}</th>
-                             <th scope="col" class="text-dark">${element.department_id}</th>
-                              <th scope="col" class="text-dark">${element.status}</th>
-                                                           
-                              </tr>
-                          </thead>
-                          <tbody id="room-data">
-                          </tbody>
-                      </table>
-                  </div>`;
-    });
-
-    document.getElementById("get_allbooks").innerHTML = container;
+    displayBooks(json);
 
     // Add event listeners for any additional actions here
   } else {
@@ -97,3 +69,44 @@ event_form.onsubmit = async (e) => {
   document.querySelector("#event_form button[type='submit']").innerHTML =
     "Submit";
 };
+
+function displayBooks(books) {
+  const bookListContainer = document.getElementById("bookList");
+
+  books.forEach((book) => {
+    const bookCard = document.createElement("div");
+    bookCard.className = "card mb-4 shadow"; // Add Bootstrap card class and shadow for a more creative look
+
+    bookCard.innerHTML = `
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="${backendURL}/storage/${book.image}" alt="Image" class="img-fluid rounded-start" />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="card-title text-primary">${book.title}</h3>
+            <p class="card-text">Author: ${book.author}</p>
+            <p class="card-text">ISBN: ${book.ISBN}</p>
+            <p class="card-text">Condition: ${book.condition}</p>
+            <p class="card-text">Department ID: ${book.department_id}</p>
+            <p class="card-text">Description: ${book.description}</p>
+            <p class="card-text">Publication Year: ${book.publication_year}</p>
+            <p class="card-text">Status: ${book.status}</p>
+          </div>
+        </div>
+      </div>
+      <hr class="my-2">
+    `;
+
+    bookListContainer.appendChild(bookCard);
+  });
+}
+
+// Assuming you have a div with the id "bookList" in your HTML
+// <div id="bookList"></div>
+
+// Assuming you have a div with the id "bookList" in your HTML
+// <div id="bookList"></div>
+
+// Assuming you have a div with the id "bookList" in your HTML
+// <div id="bookList"></div>

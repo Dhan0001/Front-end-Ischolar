@@ -19,14 +19,18 @@
       rel="stylesheet"
     />
     <link href="css/styles.css" rel="stylesheet" />
-    <script
-      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-7tuQ8gV+6Chu96HgPh0zqtP0JdtGjEJ3SFPLJsnRnxCmr1E7ElZ78c5gchYpAqVor/MymPeyA76mbDoSJFa2Q=="
       crossorigin="anonymous"
-    ></script>
+      referrerpolicy="no-referrer"
+    />
 
     <script type="module" src="js/system/mybookshelf.js"></script>
     <script src="js/utils/scripts.js" defer></script>
   </head>
+
   <body class="sb-nav-fixed">
     <!-- Top Navigation -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -60,7 +64,6 @@
             class="dropdown-menu dropdown-menu-end"
             aria-labelledby="navbarDropdown"
           >
-            <!-- <li><hr class="dropdown-divider" /></li> -->
             <li>
               <a class="dropdown-item" href="#" id="btn_logout">Logout</a>
             </li>
@@ -109,7 +112,6 @@
                   <a class="dropdown-item" href="ccis.html">CCIS</a>
                   <a class="dropdown-item" href="#">CED</a>
                   <a class="dropdown-item" href="#">CEGS</a>
-                  <!-- Add more items as needed -->
                 </div>
               </div>
               <a class="nav-link active" href="mybookshelf.html">
@@ -125,10 +127,6 @@
                 Books Borrowed
               </a>
             </div>
-          </div>
-          <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            <span id="user_logged"></span>
           </div>
         </nav>
       </div>
@@ -147,116 +145,7 @@
               <!-- Modal Btn and Form -->
               <div class="col-sm-12">
                 <!-- Modal -->
-                <form id="event_form">
-                        <!-- Modal Body -->
-                        <div class="modal-body">
-                          <!-- User Id Field -->
-                          <input type="hidden" name="user_id" id="user_id" />
-                          <!-- Slide Name Field -->
-                          <div class="mb-3">
-                            <input
-                              class="form-control"
-                              type="text"
-                              name="title"
-                              id="title"
-                              placeholder="Title"
-                              required
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <input
-                              class="form-control"
-                              type="text"
-                              name="author"
-                              id="author"
-                              placeholder="Author's Name"
-                              required
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <input
-                              class="form-control"
-                              type="text"
-                              name="ISBN"
-                              id="ISBN"
-                              placeholder="ISBN"
-                              required
-                            />
-                          </div>
-                          <!-- Description Field -->
-                          <div class="mb-3">
-                            <textarea
-                              class="form-control"
-                              name="description"
-                              id="description"
-                              placeholder="Description"
-                              required
-                            ></textarea>
-                          </div>
 
-                          <div class="mb-3">
-                            <input
-                              class="form-control"
-                              type="text"
-                              name="publication_year"
-                              id="publication_year"
-                              placeholder="Publication Year"
-                              required
-                            />
-                          </div>
-                          <!-- Image File Field -->
-                          <div class="mb-3">
-                            <input
-                              class="form-control"
-                              type="file"
-                              name="image_path"
-                              accept="image/*"
-                              required
-                            />
-                          </div>
-                          <!-- Dropdown -->
-                          <div class="input-group mb-3">
-                            <label
-                              class="input-group-text"
-                              name="condition"
-                              for="condition"
-                              >Condition Menu</label
-                            >
-                            <select class="form-select" id="condition">
-                              <option selected>Choose...</option>
-                              <option value="1">Excellent</option>
-                              <option value="2">Good</option>
-                              <option value="3">Fair</option>
-                              <option value="4">Poor</option>
-                            </select>
-                          </div>
-                          <div class="mb-3">
-                            <input
-                              class="form-control"
-                              type="text"
-                              name="deparment_id"
-                              id="department_id"
-                              placeholder="Department Id"
-                              required
-                            />
-                          </div>
-                          
-                        </div>
-                        <!-- Modal Footer -->
-                        <div class="modal-footer">
-                          <button
-                            id="modal_close"
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button class="btn btn-primary w-50" type="submit">
-                            Submit
-                          </button>
-                        </div>
-                      </form>
                 <div
                   class="modal fade"
                   id="form_modal"
@@ -284,7 +173,7 @@
                         <!-- Modal Body -->
                         <div class="modal-body">
                           <!-- User Id Field -->
-                          <input type="hidden" name="user_id" id="user_id" />
+                          <!-- <input type="hidden" name="user_id" id="user_id" /> -->
                           <!-- Slide Name Field -->
                           <div class="mb-3">
                             <input
@@ -342,7 +231,7 @@
                             <input
                               class="form-control"
                               type="file"
-                              name="image_path"
+                              name="image"
                               accept="image/*"
                               required
                             />
@@ -367,7 +256,7 @@
                             <input
                               class="form-control"
                               type="text"
-                              name="deparment_id"
+                              name="department_id"
                               id="department_id"
                               placeholder="Department Id"
                               required
@@ -414,6 +303,9 @@
             </div>
 
             <br />
+
+            <div id="bookList"></div>
+
             <!-- Get All Data -->
             <div class="row pb-5" id="get_data">
               <div
@@ -427,38 +319,6 @@
 
             <!-- Get All Data -->
 
-            <div class="container">
-              <!-- Room Section -->
-              <div class="card border-0 shadow mb-4">
-                <div class="card-body">
-                  <div class="mb-4"></div>
-
-                  <div class="table-responsive-lg">
-                  <table class="table table-hover border text-center">
-                    <thead>
-                      <tr class="bg-dark">
-                        <th scope="col" class="text-dark">Title</th>
-                        <th scope="col" class="text-dark">Author</th>
-                        <th scope="col" class="text-dark">ISBN</th>
-                        <th scope="col" class="text-dark">Description</th>
-                        <th scope="col" class="text-dark">$Publication Year</th>
-                        <!-- <img
-                          src="${backendURL}/storage/${element.image}"
-                          alt="Image"
-                          height="250px"
-                          width="250px"
-                        /> -->
-                        <th scope="col" class="text-dark">Condition</th>
-                        <th scope="col" class="text-dark">Facebook</th>
-                        <th scope="col" class="text-dark">Department</th>
-                        <th scope="col" class="text-dark">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody id="get_allbooks"></tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
             <!-- Pagination of All Data -->
             <div class="d-flex justify-content-center">
               <nav aria-label="Page navigation example">
